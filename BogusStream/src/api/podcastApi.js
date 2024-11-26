@@ -15,7 +15,7 @@ export const fetchPreviews = async () => {
     return response.json();
   } catch (error) {
     console.error('Error fetching previews:', error.message);
-    throw error; // Rethrow for further handling if needed
+    throw error;
   }
 };
 

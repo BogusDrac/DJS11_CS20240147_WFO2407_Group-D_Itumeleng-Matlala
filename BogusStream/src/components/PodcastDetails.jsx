@@ -26,8 +26,8 @@ const PodcastDetails = () => {
 
   if (!show) {
     return (
-      <div className="text-center mt-8 text-lg">
-        Loading show details...
+      <div className="text-center mt-8 text-lg mb-10">
+        <h1 className='text-6xl text-blue-500'>Loading show details...</h1>
       </div>
     );
   }
@@ -36,7 +36,7 @@ const PodcastDetails = () => {
     <div className="container mx-auto p-4">
       <div className="flex justify-end">
         <Link to="/podcasts">
-          <button className="bg-blue-600 p-1 rounded-md text-white font-medium">
+          <button className="bg-gray-600 hover:bg-blue-600 p-1 rounded-md text-white  font-medium">
             Back
           </button>
         </Link>
@@ -47,7 +47,7 @@ const PodcastDetails = () => {
       </div>
 
       {/* Season Selection */}
-      <div className="flex mb-4 overflow-x-auto">
+      <div key={id} className="flex mb-4 flex-wrap gap-5">
         {show.seasons.map((season) => (
           <Link key={season.id} to={`/podcasts/${id}/season/${season.id}`}>
             <button className="mr-2 p-2 rounded bg-gray-700 text-gray-300 hover:bg-blue-600 hover:text-white">

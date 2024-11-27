@@ -2,10 +2,22 @@ import { useState, useEffect } from "react";
 import { fetchPreviews } from "../api/podcastApi";
 import { Link } from "react-router-dom";
 
+const genreIdToTitle = {
+    1: 'Personal Growth',
+    2: 'Investigative Journalism',
+    3: 'History',
+    4: 'Comedy',
+    5: 'Entertainment',
+    6: 'Business',
+    7: 'Fiction',
+    8: 'News',
+    9: 'Kids and Family'
+};
+
 const Podcasts = () => {
     const [podcasts, setPodcasts] = useState([]);
     const [error, setError] = useState(null);
-    const [sortOption, setSortOption] = useState('alphabetical'); // Default sort option
+    const [sortOption, setSortOption] = useState('alphabetical'); 
 
     useEffect(() => {
         const getData = async () => {
@@ -68,14 +80,14 @@ const Podcasts = () => {
                         podcast.genres.map((genre, index) => (
                             <span
                                 key={index}
-                                className="text-sm text-gray-600  bg-blue-100 px-2 py-1 rounded-full"
+                                className="text-sm text-gray-600 bg-blue-100 px-2 py-1 rounded-full"
                             >
-                                {genre}
+                                {genreIdToTitle[genre] || genre}
                             </span>
                         ))
                     ) : (
                         <span className="text-sm text-gray-600">
-                            {podcast.genre}
+                            {genreIdToTitle[podcast.genre] || podcast.genre}
                         </span>
                     )}
                 </div>
@@ -102,7 +114,7 @@ const Podcasts = () => {
                 <select
                     value={sortOption}
                     onChange={handleSortChange}
-                    className="px-4 py-2 bg-blue-500 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300"
+                    className="px-4 py-2 bg-gray-300 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300"
                 >
                     <option value="alphabetical">Alphabetical (A-Z)</option>
                     <option value="reverse-alphabetical">Reverse Alphabetical (Z-A)</option>

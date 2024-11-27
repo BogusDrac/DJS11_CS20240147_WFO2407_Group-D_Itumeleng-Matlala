@@ -4,6 +4,7 @@ import PageNotFound from "./components/PageNotFound"
 import Footer from './components/Footer';
 import Podcasts from './components/Podcasts';
 import PodcastDetails from './components/PodcastDetails';
+import Home from './components/Home';
 
 
 
@@ -14,7 +15,7 @@ const App = () => {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path='/' element={<h1>Hello</h1>} />
+        <Route path='/' element={<Home />} />
         <Route path='/podcasts' element={<Podcasts />} />
         <Route path='/podcasts/:id' element={<PodcastDetails />} />
         <Route path='/podcasts/:id/season/:id' element={<Link to="/podcasts">Back</Link> } />       

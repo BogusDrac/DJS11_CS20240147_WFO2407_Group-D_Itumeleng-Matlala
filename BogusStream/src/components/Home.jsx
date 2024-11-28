@@ -97,8 +97,8 @@ const Home = () => {
 
           {selectedGenre && (
             <div className="podcasts-list">
-              <h2 className="text-2xl font-bold mb-4">
-                Podcasts in {selectedGenre}
+              <h2 className="text-3xl text-gray-600 font-bold mb-4">
+                {selectedGenre}
               </h2>
               {filteredPodcasts.length === 0 ? (
                 <p className="text-center text-gray-500">

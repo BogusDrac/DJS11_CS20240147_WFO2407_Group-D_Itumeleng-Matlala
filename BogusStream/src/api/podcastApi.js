@@ -1,4 +1,4 @@
-const URL = 'https://podcast-api.netlify.app/';
+export const URL = 'https://podcast-api.netlify.app/';
 
 const handleFetchErrors = async (response) => {
   if (!response.ok) {

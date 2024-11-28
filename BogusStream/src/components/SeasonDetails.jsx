@@ -18,6 +18,8 @@ const SeasonDetails = () => {
     const [show, setShow] = useState(null) // state holds the fetched podcats details.
     const [selectedSeason, setSelectedSeason] = useState(null) // Holds the details of the selected season.
 
+    const [favorites, setFavorites] = useState([]) // State to hold the user's favorite podcasts.
+
 
    /**
      * useEffect 
@@ -44,6 +46,25 @@ const SeasonDetails = () => {
 
         fetchDetails() // calling the fetchDetails function
     }, [podcastId, seasonId]) // Dependency array:  re-run the effect when the 'podcatId and seasonId' change
+
+
+    /**
+   * Adds an episode to the list of favorites and stores it in localStorage.
+   * 
+   * @param {Object} episode - The episode object to be added to favorites.
+   */
+  const addToFavorites = (episode) => {
+    const newFavorite = {
+      ...episode,
+      podcastId: Number(podcastId),
+      seasonNumber: Number(seasonId),
+      addedAt: new Date().toISOString() // Timestamp for when the episode was added.
+    };
+
+    const updatedFavorites = [...favorites, newFavorite]; // Add the new favorite to the existing list.
+    setFavorites(updatedFavorites); // Update the state with the new list of favorites.
+    localStorage.setItem('podcastFavorites', JSON.stringify(updatedFavorites)); // Persist the favorites list in localStorage.
+  };
 
 
     // If the podcast or selected season data has not been loaded, show a loading message.
@@ -108,7 +129,8 @@ const SeasonDetails = () => {
                     </div>
                     {/* Button to add the episode to favorites */}
                     <button
-                    className="bg-gray-300 hover:bg-red-400 hover:text-gray-700 p-2  rounded-full text-white ml-2"
+                        onClick={() => addToFavorites(episode)}
+                        className="bg-gray-300 hover:bg-red-400 hover:text-gray-700 p-2  rounded-full text-white ml-2"
                     >
                     <Heart />
                     </button>

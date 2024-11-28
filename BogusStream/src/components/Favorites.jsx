@@ -58,6 +58,61 @@ const Favorites = () => {
   }
 
 
+  /**
+   * Sorts the list of favorites based on the selected method.
+   * @param {string} method - The sorting method ('recent', 'oldest', 'az', 'za').
+   */
+  const sortFavorites = (method) => {
+    let sortedFavorites = [...favorites];
+
+    switch (method) {
+      case 'az':
+        sortedFavorites.sort((a, b) => a.title.localeCompare(b.title)); // Sort by title A-Z.
+        break;
+      case 'za':
+        sortedFavorites.sort((a, b) => b.title.localeCompare(a.title)); // Sort by title Z-A.
+        break;
+      case 'recent':
+        sortedFavorites.sort((a, b) => new Date(b.addedAt) - new Date(a.addedAt)); // Sort by most recent.
+        break;
+      case 'oldest':
+        sortedFavorites.sort((a, b) => new Date(a.addedAt) - new Date(b.addedAt)); // Sort by oldest.
+        break;
+    }
+
+    setFavorites(sortedFavorites); // Update state with the sorted favorites.
+    setSortMethod(method); // Update the selected sorting method.
+  };
+
+  /**
+   * Clears all favorites from the list and localStorage.
+   * Displays a confirmation prompt before clearing.
+   */
+  const resetFavorites = () => {
+    if (window.confirm('Are you sure you want to clear all favorites?')) {
+      localStorage.removeItem('podcastFavorites'); // Remove favorites from localStorage.
+      setFavorites([]); // Clear the state.
+    }
+  };
+
+  /**
+   * Groups the favorites by podcast ID and season number for easier display.
+   * @returns {Object} An object where the key is a combination of podcastId and seasonNumber,
+   * and the value is an object containing grouped episodes.
+   */
+  const groupedFavorites = favorites.reduce((acc, episode) => {
+    const key = `${episode.podcastId}-${episode.seasonNumber}`;
+    if (!acc[key]) {
+      acc[key] = {
+        podcastId: episode.podcastId,
+        seasonNumber: episode.seasonNumber,
+        episodes: []
+      };
+    }
+    acc[key].episodes.push(episode);
+    return acc;
+  }, {});
+
   return (
     <>
     <div className="container">hello</div>

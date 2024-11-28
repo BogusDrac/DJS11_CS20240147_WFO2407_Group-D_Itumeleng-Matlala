@@ -6,7 +6,7 @@ import Podcasts from './components/Podcasts';
 import PodcastDetails from './components/PodcastDetails';
 import Home from './components/Home';
 import SeasonDetails from './components/SeasonDetails'
-/* import Favorites from './components/Favorites' */
+import Favorites from './components/Favorites'
 
 
 
@@ -26,7 +26,7 @@ const App = () => {
         <Route path='/podcasts' element={<Podcasts />} />
         <Route path='/podcasts/:id' element={<PodcastDetails />} />
         <Route path='/podcasts/:Id/season/:seasonId' element={<SeasonDetails /> } />      
-        {/* <Route path='/favorites' element={<Favorites />} /> */}
+        <Route path='/favorites' element={<Favorites />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
       <Footer />

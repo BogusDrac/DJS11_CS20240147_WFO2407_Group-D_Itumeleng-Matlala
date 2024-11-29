@@ -50,7 +50,9 @@ const Favorites = () => {
    */
   const removeFromFavorites = (episodeId, podcastId, seasonNumber) => {
     const updatedFavorites = favorites.filter(
-      fav => !(fav.id === episodeId && fav.podcastId === podcastId && fav.seasonNumber === seasonNumber)
+      fav => !(fav.id === episodeId && 
+               fav.podcastId === podcastId && 
+               fav.seasonNumber === seasonNumber) // Check if the episode to remove matches any in the favorites list
     );
 
     setFavorites(updatedFavorites); // Update the favorites state with the updated list after removal

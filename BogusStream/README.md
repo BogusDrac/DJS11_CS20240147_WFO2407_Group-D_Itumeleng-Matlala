@@ -70,5 +70,5 @@ The Bogus Stream app includes several key features that enhance functionality an
 
 
 # Website link
-## [BogusStreamApp](https://bogus-podcast-stream.netlify.app/)
+## [BogusStreamApp](https://bogus-stream.netlify.app/)
 

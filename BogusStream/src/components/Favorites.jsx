@@ -114,11 +114,66 @@ const Favorites = () => {
   }, {});
 
   return (
-    <>
-    <div className="container">hello</div>
-    </>
-  )
+    <div className="container mx-auto p-4">
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold text-gray-600">My Favorites</h1>
+        <div className="flex space-x-2">
+          {/* Dropdown for selecting the sort method */}
+          <select
+            value={sortMethod}
+            onChange={(e) => sortFavorites(e.target.value)}
+            className="p-2 bg-gray-700 text-white rounded"
+          >
+            <option value="recent">Most Recent</option>
+            <option value="oldest">Oldest</option>
+            <option value="az">A-Z</option>
+            <option value="za">Z-A</option>
+          </select>
+          <button
+            onClick={resetFavorites}
+            className="bg-red-600 hover:bg-red-700 p-2 rounded-md text-white"
+          >
+            Clear Favorites
+          </button>
+        </div>
+      </div>
 
-}
+      {/* Conditional rendering: Show a message if there are no favorites */}
+      {Object.keys(groupedFavorites).length === 0 ? (
+        <div className="text-center text-gray-500">
+          No favorite episodes yet. Start exploring podcasts!
+        </div>
+      ) : (
+        Object.values(groupedFavorites).map((group) => (
+          <div
+            key={`${group.podcastId}-${group.seasonNumber}`}
+            className="mb-6 p-4 bg-gray-800 rounded shadow-md"
+          >
+            <h2 className="text-xl font-semibold mb-2">
+               Season: {group.seasonNumber}
+            </h2>
+            {group.episodes.map((episode) => (
+              <div
+                key={episode.id}
+                className="flex justify-between items-center bg-gray-700 p-3 rounded-lg mb-2"
+              >
+                <div>
+                  <h3 className="font-bold">{episode.title}</h3>
+                  <p className="text-sm text-gray-400">Added on: {new Date(episode.addedAt).toLocaleString()}</p>
+                </div>
+                <button
+                  onClick={() => removeFromFavorites(episode.id, episode.podcastId, episode.seasonNumber)}
+                  className="bg-red-600 hover:bg-red-700 p-2 rounded-md text-white"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+          </div>
+        ))
+      )}
+    </div>
+  );
+};
 
 export default Favorites;

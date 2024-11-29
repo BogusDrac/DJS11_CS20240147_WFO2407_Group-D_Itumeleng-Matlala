@@ -161,12 +161,18 @@ const Favorites = () => {
                 key={episode.id}
                 className="flex justify-between items-center bg-gray-700 p-3 rounded-lg mb-2"
               >
-                <div>
-                  <h3 className="font-bold">{episode.title}</h3>
-                  <p className="text-sm text-gray-400">Added on: {new Date(episode.addedAt).toLocaleString()}</p>
-                </div>
+                <Link
+                  to={`/podcasts/${episode.podcastId}`}> {/*  Link to the podcast page when clicked */}
+                  <div>
+                    <h3 className="font-bold">{episode.title}</h3>
+                    <p className="text-sm text-gray-400">Added on: {new Date(episode.addedAt).toLocaleString()}</p>
+                  </div>
+                </Link>
+                
+
+
                 <button
-                  onClick={() => removeFromFavorites(episode.id, episode.podcastId, episode.seasonNumber)}
+                  onClick={() => removeFromFavorites(episode.id, episode.podcastId, episode.seasonNumber)} // Remove the episode from favorites when clicked
                   className="bg-red-600 hover:bg-red-700 p-2 rounded-md text-white"
                 >
                   Remove

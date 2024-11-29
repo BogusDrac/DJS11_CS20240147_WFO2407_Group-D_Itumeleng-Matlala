@@ -65,6 +65,10 @@ The Bogus Stream app includes several key features that enhance functionality an
       * Contact email for inquiries or feedback.
 
 
+## PageNotFound
+    * Error Handling: A custom 404 page that displays a friendly error message and a link to a route that will redirect the user to the homepage
+
+
 # Website link
 ## [BogusStreamApp](https://bogus-podcast-stream.netlify.app/)
 

@@ -129,7 +129,7 @@ const SeasonDetails = () => {
                     </div>
                     {/* Button to add the episode to favorites */}
                     <button
-                        onClick={() => addToFavorites(episode)}
+                        onClick={() => addToFavorites(episode)} // Add episode to favorites when clicked
                         className="bg-gray-300 hover:bg-red-400 hover:text-gray-700 p-2  rounded-full text-white ml-2"
                     >
                     <Heart />

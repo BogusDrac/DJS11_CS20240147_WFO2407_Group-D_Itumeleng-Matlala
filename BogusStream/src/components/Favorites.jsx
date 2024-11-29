@@ -67,16 +67,16 @@ const Favorites = () => {
 
     switch (method) {
       case 'az':
-        sortedFavorites.sort((a, b) => a.title.localeCompare(b.title)); // Sort by title A-Z.
+        sortedFavorites.sort((a, b) => a.title.localeCompare(b.title)); // Sort by title in alphabetical order
         break;
       case 'za':
-        sortedFavorites.sort((a, b) => b.title.localeCompare(a.title)); // Sort by title Z-A.
+        sortedFavorites.sort((a, b) => b.title.localeCompare(a.title)); //  Sort by title in reverse alphabetical order
         break;
       case 'recent':
-        sortedFavorites.sort((a, b) => new Date(b.addedAt) - new Date(a.addedAt)); // Sort by most recent.
+        sortedFavorites.sort((a, b) => new Date(b.addedAt) - new Date(a.addedAt)); // Sort by (added At) in descending order (newest first)
         break;
       case 'oldest':
-        sortedFavorites.sort((a, b) => new Date(a.addedAt) - new Date(b.addedAt)); // Sort by oldest.
+        sortedFavorites.sort((a, b) => new Date(a.addedAt) - new Date(b.addedAt)); // Sort by (added At) in ascending order (oldest first)
         break;
     }
 
@@ -101,7 +101,10 @@ const Favorites = () => {
    * and the value is an object containing grouped episodes.
    */
   const groupedFavorites = favorites.reduce((acc, episode) => {
-    const key = `${episode.podcastId}-${episode.seasonNumber}`;
+    const key = `${episode.podcastId}-${episode.seasonNumber}`; // key is a combination of podcastId and seasonNumber
+
+
+    // if the key doesn't exist in the accumulator, create a new object with the key and the episode
     if (!acc[key]) {
       acc[key] = {
         podcastId: episode.podcastId,
@@ -109,9 +112,9 @@ const Favorites = () => {
         episodes: []
       };
     }
-    acc[key].episodes.push(episode);
+    acc[key].episodes.push(episode); // add the episode to the array of episodes for the key
     return acc;
-  }, {});
+  }, {}); 
 
   return (
     <div className="container mx-auto p-4">
@@ -121,7 +124,7 @@ const Favorites = () => {
           {/* Dropdown for selecting the sort method */}
           <select
             value={sortMethod}
-            onChange={(e) => sortFavorites(e.target.value)}
+            onChange={(e) => sortFavorites(e.target.value)} // Update the sort method when the user selects a new one
             className="p-2 bg-gray-700 text-white rounded"
           >
             <option value="recent">Most Recent</option>
@@ -130,7 +133,7 @@ const Favorites = () => {
             <option value="za">Z-A</option>
           </select>
           <button
-            onClick={resetFavorites}
+            onClick={resetFavorites} // resets the favorites when clicked
             className="bg-red-600 hover:bg-red-700 p-2 rounded-md text-white"
           >
             Clear Favorites
@@ -139,6 +142,7 @@ const Favorites = () => {
       </div>
 
       {/* Conditional rendering: Show a message if there are no favorites */}
+      {/* if there are no favorites, show a message saying so, else show the grouped favorites */}
       {Object.keys(groupedFavorites).length === 0 ? (
         <div className="text-center text-gray-500">
           No favorite episodes yet. Start exploring podcasts!

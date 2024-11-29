@@ -58,13 +58,13 @@ const Podcasts = () => {
      */
     const sortPodcasts = (podcasts, option) => {
         if (option === 'alphabetical') {
-            return podcasts.sort((a, b) => a.title.localeCompare(b.title)); // Sort A-Z.
+            return podcasts.sort((a, b) => a.title.localeCompare(b.title)); // Sort by title in alphabetical order.
         } else if (option === 'reverse-alphabetical') {
-            return podcasts.sort((a, b) => b.title.localeCompare(a.title)); // Sort Z-A.
+            return podcasts.sort((a, b) => b.title.localeCompare(a.title)); // Sort by title in reverse alphabetical order.
         } else if (option === 'recently-updated') {
-            return podcasts.sort((a, b) => new Date(b.updated) - new Date(a.updated)); // Sort by most recent update.
+            return podcasts.sort((a, b) => new Date(b.updated) - new Date(a.updated)); // Sort by updated date in descending order.
         } else if (option === 'least-recently-updated') {
-            return podcasts.sort((a, b) => new Date(a.updated) - new Date(b.updated)); // Sort by least recent update.
+            return podcasts.sort((a, b) => new Date(a.updated) - new Date(b.updated)); // Sort by updated date in ascending order.
         }
         return podcasts; // Return unsorted if no valid option is selected.
     };
@@ -167,6 +167,7 @@ const Podcasts = () => {
                 <select
                     value={sortOption}
                     onChange={handleSortChange}
+                     // handleSortChange function is to update the sortOption state when the select option is changed
                     className="px-4 py-2 bg-gray-300 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300"
                 >
                     <option value="alphabetical">Alphabetical (A-Z)</option>
